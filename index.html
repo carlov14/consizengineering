@@ -9,20 +9,19 @@
 body{
     margin:0;
     font-family:Arial, sans-serif;
-    background:#f5f5f5;
+    background:#f4f4f4;
     color:#222;
 }
 
 /* NAV */
 nav{
     position:fixed;
-    top:0;
     width:100%;
-    background:rgba(25,25,25,0.9);
+    top:0;
     display:flex;
     justify-content:space-between;
-    align-items:center;
     padding:10px 30px;
+    background:rgba(20,20,20,0.85);
     z-index:1000;
 }
 
@@ -32,28 +31,28 @@ nav img{
 
 nav a{
     color:#ffd966;
-    margin:0 12px;
+    margin:0 10px;
     text-decoration:none;
     font-weight:bold;
 }
 
-/* HERO */
+/* HERO - MODERN 3D STYLE LOOK */
 .hero{
     height:100vh;
-    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-    url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80');
+    background:
+    linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1600&q=80');
     background-size:cover;
+    background-position:center;
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
     color:white;
-    padding:20px;
 }
 
 .hero h1{
-    font-size:55px;
+    font-size:60px;
     margin:0;
     color:#ffd966;
 }
@@ -68,8 +67,8 @@ nav a{
     padding:12px 25px;
     background:#ffd966;
     border:none;
-    cursor:pointer;
     font-weight:bold;
+    cursor:pointer;
 }
 
 /* SECTIONS */
@@ -91,7 +90,7 @@ h2{
     gap:20px;
 }
 
-/* CARD */
+/* CARDS */
 .card{
     background:white;
     padding:20px;
@@ -99,13 +98,18 @@ h2{
     box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
-/* ABOUT */
-.about{
+/* MISSION VISION FIXED */
+.mission{
     background:#2f343a;
     color:white;
 }
 
-/* GALLERY */
+.mission .card{
+    background:#3b424a;
+    color:white;
+}
+
+/* PROJECT IMAGES FIXED */
 .gallery img{
     width:100%;
     border-radius:10px;
@@ -118,6 +122,7 @@ h2{
     padding:70px 20px;
 }
 
+/* FOOTER */
 footer{
     background:#111;
     color:#aaa;
@@ -129,13 +134,10 @@ footer{
 
 <body>
 
-<!-- NAV -->
 <nav>
     <div>
-        <!-- LOGO PLACE -->
-        <img src="https://via.placeholder.com/120x40?text=LOGO" alt="Logo">
+        <img src="https://via.placeholder.com/120x40?text=LOGO" alt="logo">
     </div>
-
     <div>
         <a href="#about">About</a>
         <a href="#mission">Mission</a>
@@ -145,45 +147,40 @@ footer{
     </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO (3D MODERN FEEL) -->
 <div class="hero">
-    <h1>ConSize Engineering</h1>
-    <p>Precision in every scale</p>
-    <button class="btn" onclick="document.getElementById('services').scrollIntoView();">
-        Explore Our Expertise
-    </button>
+    <div>
+        <h1>ConSize Engineering</h1>
+        <p>Precision in every scale</p>
+        <button class="btn" onclick="document.getElementById('services').scrollIntoView();">
+            Explore Services
+        </button>
+    </div>
 </div>
 
 <!-- ABOUT -->
 <section id="about">
     <h2>About Us</h2>
     <p>
-        ConSize Engineering is a professional design and consultancy firm committed to delivering precise,
-        innovative, and code-compliant engineering solutions. We transform ideas into safe, functional,
-        and buildable structures for residential, commercial, and industrial projects.
+        ConSize Engineering delivers precise architectural and structural engineering solutions
+        for residential, commercial, and industrial projects with focus on safety, efficiency, and quality.
     </p>
 </section>
 
-<!-- MISSION VISION -->
-<section id="mission" class="about">
+<!-- MISSION VISION FIXED -->
+<section id="mission" class="mission">
     <h2>Mission & Vision</h2>
 
     <div class="grid">
 
         <div class="card">
             <h3>Mission</h3>
-            <p>
-                To provide high-quality engineering design and consultancy services that ensure safety,
-                precision, and efficiency in every project we handle.
-            </p>
+            <p>To provide accurate, safe, and high-quality engineering design services that exceed client expectations.</p>
         </div>
 
         <div class="card">
             <h3>Vision</h3>
-            <p>
-                To become a trusted engineering firm recognized for excellence, innovation, and precision
-                in structural and architectural solutions.
-            </p>
+            <p>To become a trusted engineering consultancy known for precision, innovation, and reliability.</p>
         </div>
 
     </div>
@@ -191,75 +188,46 @@ footer{
 
 <!-- SERVICES -->
 <section id="services">
-    <h2>Our Services</h2>
+    <h2>Services</h2>
 
     <div class="grid">
-
-        <div class="card">
-            <h3>Architectural Design</h3>
-            <p>We create functional, aesthetic, and efficient architectural designs tailored to client vision and project requirements.</p>
-        </div>
-
-        <div class="card">
-            <h3>Structural Analysis & Design</h3>
-            <p>Safe, reliable, and code-compliant structural solutions ensuring durability and long-term performance.</p>
-        </div>
-
-        <div class="card">
-            <h3>2D Drawings</h3>
-            <p>Precise technical drawings including plans, elevations, and sections for accurate construction execution.</p>
-        </div>
-
-        <div class="card">
-            <h3>3D Visualization</h3>
-            <p>Realistic 3D models that help clients clearly visualize their project before construction begins.</p>
-        </div>
-
-        <div class="card">
-            <h3>BOQ & Cost Estimation</h3>
-            <p>Detailed quantity take-offs and cost estimates for proper budgeting and financial planning.</p>
-        </div>
-
-        <div class="card">
-            <h3>Permit Processing</h3>
-            <p>Complete preparation and coordination of documents for smooth building permit approval.</p>
-        </div>
-
+        <div class="card">Architectural Design</div>
+        <div class="card">Structural Engineering</div>
+        <div class="card">2D Drafting</div>
+        <div class="card">3D Visualization</div>
+        <div class="card">BOQ & Costing</div>
+        <div class="card">Permit Processing</div>
     </div>
 </section>
 
-<!-- PROJECTS -->
+<!-- PROJECTS (FIXED IMAGES) -->
 <section id="projects">
     <h2>Projects</h2>
 
     <div class="grid gallery">
-
-        <img src="https://via.placeholder.com/400x250?text=Project+1">
-        <img src="https://via.placeholder.com/400x250?text=Project+2">
-        <img src="https://via.placeholder.com/400x250?text=Project+3">
-
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80">
     </div>
 </section>
 
 <!-- CTA -->
 <div class="cta">
-    <h2>Let’s Build Something Precise and Strong</h2>
-    <p>Partner with ConSize Engineering for reliable and professional engineering solutions.</p>
+    <h2>Let’s Build Something Strong and Precise</h2>
     <button onclick="window.location.href='mailto:consizeengineering@gmail.com'">
-        Request a Consultation
+        Contact Us
     </button>
 </div>
 
 <!-- CONTACT -->
 <section id="contact">
-    <h2>Contact Us</h2>
+    <h2>Contact</h2>
     <p>Email: consizeengineering@gmail.com</p>
-    <p>Location: Philippines</p>
+    <p>Philippines</p>
 </section>
 
-<!-- FOOTER -->
 <footer>
-    © 2026 ConSize Engineering. All Rights Reserved.
+    © 2026 ConSize Engineering
 </footer>
 
 </body>
