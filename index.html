@@ -1,234 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ConSize Engineering</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConSize Engineering | Precision in every scale</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom Theme Colors mapped to Tailwind variables */
+        :root {
+            --color-grey-dark: #23272A;
+            --color-grey-medium: #4A4E51;
+            --color-grey-light: #F4F5F6;
+            --color-yellow: #F6E05E;
+            --color-yellow-hover: #ECC94B;
+        }
 
-<style>
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f4f4f4;
-    color:#222;
-}
+        /* 3D Grid Overlay for Hero Background */
+        .engineering-grid {
+            background-image: 
+                linear-gradient(rgba(246, 224, 94, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(246, 224, 94, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: top;
+            animation: gridMove 20s linear infinite;
+        }
 
-/* NAV */
-nav{
-    position:fixed;
-    width:100%;
-    top:0;
-    display:flex;
-    justify-content:space-between;
-    padding:10px 30px;
-    background:rgba(20,20,20,0.85);
-    z-index:1000;
-}
-
-nav img{
-    height:40px;
-}
-
-nav a{
-    color:#ffd966;
-    margin:0 10px;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-/* HERO - MODERN 3D STYLE LOOK */
-.hero{
-    height:100vh;
-    background:
-    linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-    url('https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1600&q=80');
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    color:white;
-}
-
-.hero h1{
-    font-size:60px;
-    margin:0;
-    color:#ffd966;
-}
-
-.hero p{
-    font-size:20px;
-    color:#eee;
-}
-
-.btn{
-    margin-top:20px;
-    padding:12px 25px;
-    background:#ffd966;
-    border:none;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-/* SECTIONS */
-section{
-    max-width:1100px;
-    margin:auto;
-    padding:80px 20px;
-}
-
-h2{
-    border-left:5px solid #ffd966;
-    padding-left:10px;
-}
-
-/* GRID */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
-
-/* CARDS */
-.card{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-}
-
-/* MISSION VISION FIXED */
-.mission{
-    background:#2f343a;
-    color:white;
-}
-
-.mission .card{
-    background:#3b424a;
-    color:white;
-}
-
-/* PROJECT IMAGES FIXED */
-.gallery img{
-    width:100%;
-    border-radius:10px;
-}
-
-/* CTA */
-.cta{
-    background:#ffd966;
-    text-align:center;
-    padding:70px 20px;
-}
-
-/* FOOTER */
-footer{
-    background:#111;
-    color:#aaa;
-    text-align:center;
-    padding:20px;
-}
-</style>
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 800px; }
+        }
+    </style>
 </head>
+<body class="bg-[#F4F5F6] text-[#23272A] font-sans antialiased">
 
-<body>
+    <nav class="sticky top-0 z-50 bg-[#23272A] text-white shadow-md border-b border-[#F6E05E]/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-2">
+                    <div class="bg-[#F6E05E] text-[#23272A] p-2 rounded-lg font-black text-xl tracking-tighter">CS</div>
+                    <div>
+                        <span class="font-bold text-xl tracking-wide block">ConSize</span>
+                        <span class="text-xs text-[#F6E05E] tracking-widest uppercase block -mt-1">Engineering</span>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="hover:text-[#F6E05E] transition-colors duration-300">Home</a>
+                    <a href="#about" class="hover:text-[#F6E05E] transition-colors duration-300">About</a>
+                    <a href="#specialties" class="hover:text-[#F6E05E] transition-colors duration-300">Specialties</a>
+                    <a href="#portfolio" class="hover:text-[#F6E05E] transition-colors duration-300">Portfolio</a>
+                    <a href="#contact" class="bg-[#F6E05E] text-[#23272A] px-5 py-2.5 rounded-md font-semibold hover:bg-[#ECC94B] transition-colors duration-300 shadow-sm">Get a Quote</a>
+                </div>
 
-<nav>
-    <div>
-        <img src="https://via.placeholder.com/120x40?text=LOGO" alt="logo">
-    </div>
-    <div>
-        <a href="#about">About</a>
-        <a href="#mission">Mission</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </div>
-</nav>
-
-<!-- HERO (3D MODERN FEEL) -->
-<div class="hero">
-    <div>
-        <h1>ConSize Engineering</h1>
-        <p>Precision in every scale</p>
-        <button class="btn" onclick="document.getElementById('services').scrollIntoView();">
-            Explore Services
-        </button>
-    </div>
-</div>
-
-<!-- ABOUT -->
-<section id="about">
-    <h2>About Us</h2>
-    <p>
-        ConSize Engineering delivers precise architectural and structural engineering solutions
-        for residential, commercial, and industrial projects with focus on safety, efficiency, and quality.
-    </p>
-</section>
-
-<!-- MISSION VISION FIXED -->
-<section id="mission" class="mission">
-    <h2>Mission & Vision</h2>
-
-    <div class="grid">
-
-        <div class="card">
-            <h3>Mission</h3>
-            <p>To provide accurate, safe, and high-quality engineering design services that exceed client expectations.</p>
-        </div>
-
-        <div class="card">
-            <h3>Vision</h3>
-            <p>To become a trusted engineering consultancy known for precision, innovation, and reliability.</p>
-        </div>
-
-    </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-    <h2>Services</h2>
-
-    <div class="grid">
-        <div class="card">Architectural Design</div>
-        <div class="card">Structural Engineering</div>
-        <div class="card">2D Drafting</div>
-        <div class="card">3D Visualization</div>
-        <div class="card">BOQ & Costing</div>
-        <div class="card">Permit Processing</div>
-    </div>
-</section>
-
-<!-- PROJECTS (FIXED IMAGES) -->
-<section id="projects">
-    <h2>Projects</h2>
-
-    <div class="grid gallery">
-        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80">
-        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80">
-        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80">
-    </div>
-</section>
-
-<!-- CTA -->
-<div class="cta">
-    <h2>Let’s Build Something Strong and Precise</h2>
-    <button onclick="window.location.href='mailto:consizeengineering@gmail.com'">
-        Contact Us
-    </button>
-</div>
-
-<!-- CONTACT -->
-<section id="contact">
-    <h2>Contact</h2>
-    <p>Email: consizeengineering@gmail.com</p>
-    <p>Philippines</p>
-</section>
-
-<footer>
-    © 2026 ConSize Engineering
-</footer>
-
-</body>
-</html>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-400 hover:text-white focus:outline-none">
