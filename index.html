@@ -9,57 +9,88 @@
 body{
     margin:0;
     font-family:Arial, sans-serif;
-    background:#f4f4f4;
+    background:#f6f6f6;
     color:#222;
 }
 
-/* HERO */
-.hero{
-    height:90vh;
-    background:linear-gradient(rgba(30,30,30,0.8), rgba(30,30,30,0.8)),
-    url('https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1600&q=80');
-    background-size:cover;
+/* NAV */
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(30,30,30,0.85);
+    backdrop-filter:blur(10px);
     display:flex;
-    align-items:center;
     justify-content:center;
-    text-align:center;
-    color:#ffd966;
-    padding:20px;
+    padding:12px;
+    z-index:1000;
 }
 
-.hero h1{
+nav a{
+    color:#ffd966;
+    margin:0 15px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* HERO SPLIT */
+.hero{
+    display:flex;
+    height:100vh;
+}
+
+.hero-left{
+    flex:1;
+    background:#2f343a;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:60px;
+    color:white;
+}
+
+.hero-left h1{
     font-size:50px;
     margin:0;
+    color:#ffd966;
 }
 
-.hero p{
-    font-size:20px;
-    color:#fff3b0;
+.hero-left p{
+    font-size:18px;
+    color:#ddd;
 }
 
+.hero-right{
+    flex:1;
+    background:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80');
+    background-size:cover;
+}
+
+/* BUTTON */
 .btn{
     margin-top:20px;
-    padding:12px 25px;
+    padding:12px 20px;
     background:#ffd966;
     border:none;
     cursor:pointer;
     font-weight:bold;
+    width:200px;
 }
 
-/* SECTION */
+/* SECTIONS */
 section{
     max-width:1100px;
     margin:auto;
-    padding:60px 20px;
+    padding:80px 20px;
 }
 
 h2{
-    border-left:6px solid #ffd966;
+    border-left:5px solid #ffd966;
     padding-left:10px;
 }
 
-/* SERVICES */
-.services{
+/* SERVICE GRID */
+.grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:20px;
@@ -67,28 +98,28 @@ h2{
 
 .card{
     background:white;
-    padding:20px;
+    padding:25px;
     border-radius:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
     transition:0.3s;
 }
 
 .card:hover{
-    transform:translateY(-8px);
+    transform:scale(1.05);
 }
 
-/* ABOUT STRIP */
+/* ABOUT */
 .about{
     background:#2f343a;
     color:white;
-    padding:60px 20px;
+    padding:80px 20px;
 }
 
 /* CTA */
 .cta{
     background:#ffd966;
     text-align:center;
-    padding:60px 20px;
+    padding:70px 20px;
 }
 
 footer{
@@ -102,43 +133,47 @@ footer{
 
 <body>
 
+<nav>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+</nav>
+
 <div class="hero">
-    <div>
+    <div class="hero-left">
         <h1>ConSize Engineering</h1>
         <p>Precision in every scale</p>
-        <button class="btn" onclick="document.getElementById('contact').scrollIntoView();">
-            Request a Consultation
+        <button class="btn" onclick="document.getElementById('services').scrollIntoView();">
+            Explore Services
         </button>
     </div>
+
+    <div class="hero-right"></div>
 </div>
 
-<section class="about">
+<section id="about" class="about">
     <h2>About Us</h2>
     <p>
-        ConSize Engineering is a professional design and consultancy firm specializing in architectural,
-        structural, and construction engineering services. We deliver precise, code-compliant, and efficient
-        solutions for residential, commercial, and industrial projects.
+        ConSize Engineering provides professional architectural and structural engineering solutions.
+        We focus on precision, safety, and efficient design for residential, commercial, and industrial projects.
     </p>
 </section>
 
-<section>
-    <h2>Our Services</h2>
+<section id="services">
+    <h2>Services</h2>
 
-    <div class="services">
-
-        <div class="card"><b>Architectural Design</b><br>Functional and efficient design solutions.</div>
-        <div class="card"><b>Structural Design</b><br>Safe and code-compliant engineering analysis.</div>
-        <div class="card"><b>2D Drafting</b><br>Accurate construction drawings and details.</div>
-        <div class="card"><b>3D Visualization</b><br>Realistic modeling and presentation.</div>
-        <div class="card"><b>BOQ & Costing</b><br>Accurate project budgeting and estimation.</div>
-        <div class="card"><b>Permit Processing</b><br>Complete documentation for approvals.</div>
-
+    <div class="grid">
+        <div class="card">Architectural Design</div>
+        <div class="card">Structural Engineering</div>
+        <div class="card">2D Drafting</div>
+        <div class="card">3D Visualization</div>
+        <div class="card">BOQ & Costing</div>
+        <div class="card">Permit Processing</div>
     </div>
 </section>
 
 <section class="cta">
-    <h2>Build with Precision</h2>
-    <p>Let’s bring your engineering project to life with accuracy and quality.</p>
+    <h2>Let’s Build Something Precise</h2>
     <button onclick="window.location.href='mailto:consizeengineering@gmail.com'">
         Contact Us
     </button>
@@ -147,7 +182,7 @@ footer{
 <section id="contact">
     <h2>Contact</h2>
     <p>Email: consizeengineering@gmail.com</p>
-    <p>Location: Philippines</p>
+    <p>Philippines</p>
 </section>
 
 <footer>
