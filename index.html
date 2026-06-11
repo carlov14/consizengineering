@@ -4,22 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ConSize Engineering | Precision in every scale</title>
-
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
+        /* Custom Theme Colors mapped to Tailwind variables */
         :root {
             --color-grey-dark: #23272A;
             --color-grey-medium: #4A4E51;
             --color-grey-light: #F4F5F6;
             --color-yellow: #F6E05E;
+            --color-yellow-hover: #ECC94B;
         }
 
+        /* 3D Grid Overlay for Hero Background */
         .engineering-grid {
-            background-image:
-                linear-gradient(rgba(246,224,94,0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(246,224,94,0.05) 1px, transparent 1px);
+            background-image: 
+                linear-gradient(rgba(246, 224, 94, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(246, 224, 94, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
             transform: perspective(500px) rotateX(60deg);
             transform-origin: top;
@@ -30,156 +31,395 @@
             0% { background-position: 0 0; }
             100% { background-position: 0 800px; }
         }
-
-        /* WATERMARK */
-        .watermark-layer {
-            position: absolute;
-            inset: 0;
-            z-index: 10;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='140'%3E%3Ctext x='10' y='80' font-size='20' fill='white' fill-opacity='0.08' transform='rotate(-25 110 70)'%3EConSize Engineering%3C/text%3E%3C/svg%3E");
-            background-repeat: repeat;
-            background-size: 220px 140px;
-        }
     </style>
 </head>
-
 <body class="bg-[#F4F5F6] text-[#23272A] font-sans antialiased">
 
-<!-- ================= YOUR FULL WEBSITE (UNCHANGED) ================= -->
-<!-- KEEP EVERYTHING YOU ALREADY HAVE EXACTLY HERE -->
-<!-- ONLY ADD MODAL BELOW -->
+    <nav class="sticky top-0 z-50 bg-[#23272A] text-white shadow-md border-b border-[#F6E05E]/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <img src="logo.png" alt="ConSize Engineering Logo" class="h-14 w-auto">
 
-<!-- ================= MODAL ================= -->
-<div id="imageModal"
-     class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+                    <div>
+                    <span class="font-bold text-xl tracking-wide block">ConSize</span>
+                    <span class="text-xs text-[#F6E05E] tracking-widest uppercase block -mt-1">Engineering</span>
+                </div>
+            </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="hover:text-[#F6E05E] transition-colors duration-300">Home</a>
+                    <a href="#about" class="hover:text-[#F6E05E] transition-colors duration-300">About</a>
+                    <a href="#specialties" class="hover:text-[#F6E05E] transition-colors duration-300">Specialties</a>
+                    <a href="#projects" class="hover:text-[#F6E05E] transition-colors duration-300">Portfolio</a>
+                    <a href="#contact" class="bg-[#F6E05E] text-[#23272A] px-5 py-2.5 rounded-md font-semibold hover:bg-[#ECC94B] transition-colors duration-300 shadow-sm">Get a Quote</a>
+                </div>
 
-    <div class="relative max-w-5xl w-full px-4">
-
-        <button id="closeModal"
-                class="absolute top-2 right-2 text-white text-3xl z-50">
-            &times;
-        </button>
-
-        <div class="relative">
-            <img id="modalImg" class="w-full rounded-lg z-0">
-            <div class="absolute inset-0 watermark-layer"></div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-400 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
         </div>
 
+        <div id="mobile-menu" class="hidden md:hidden bg-[#4A4E51] border-t border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md hover:bg-[#23272A] hover:text-[#F6E05E]">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md hover:bg-[#23272A] hover:text-[#F6E05E]">About</a>
+                <a href="#specialties" class="block px-3 py-2 rounded-md hover:bg-[#23272A] hover:text-[#F6E05E]">Specialties</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md hover:bg-[#23272A] hover:text-[#F6E05E]">Portfolio</a>
+                <a href="#contact" class="block px-3 py-2 mt-2 text-center bg-[#F6E05E] text-[#23272A] font-semibold rounded-md">Get a Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="relative bg-[#23272A] text-white overflow-hidden min-h-[85vh] flex items-center">
+        <div class="absolute inset-0 z-0 opacity-40 pointer-events-none">
+            <div class="absolute inset-0 engineering-grid"></div>
+            <canvas id="particleCanvas" class="w-full h-full"></canvas>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/20 rounded-full mb-6">
+                    <span class="w-2 h-2 rounded-full bg-[#F6E05E] animate-pulse"></span>
+                    <span class="text-xs uppercase tracking-widest text-gray-300 font-medium">Precision in every scale</span>
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
+                    Engineering Solutions <span class="text-[#F6E05E]">Where Accuracy Meets Design</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-300 mb-10 leading-relaxed">
+                    ConSize Engineering translates ambitious conceptual designs into structurally sound, compliant, and beautifully optimized real-world structures.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#specialties" class="bg-[#F6E05E] text-[#23272A] px-8 py-4 rounded-md font-bold text-center hover:bg-[#ECC94B] transition-all transform hover:-translate-y-0.5 shadow-lg">Our Services</a>
+                    <a href="#contact" class="border-2 border-white/80 hover:border-[#F6E05E] text-white hover:text-[#F6E05E] px-8 py-4 rounded-md font-bold text-center transition-all transform hover:-translate-y-0.5">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-stretch">
+                <div class="bg-[#F4F5F6] p-8 md:p-12 rounded-2xl border-l-8 border-[#23272A] flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="text-[#23272A] mb-4 text-3xl"><i class="fa-solid fa-bullseye"></i></div>
+                        <h3 class="text-2xl font-bold text-[#23272A] mb-4">Our Mission</h3>
+                        <p class="text-[#4A4E51] leading-relaxed">
+                            To deliver reliable, efficient, and innovative engineering and architectural solutions that balance structural integrity with aesthetic functionality.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-[#23272A] text-white p-8 md:p-12 rounded-2xl border-l-8 border-[#F6E05E] flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="text-[#F6E05E] mb-4 text-3xl"><i class="fa-solid fa-eye"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            To become a trusted engineering and design firm known for turning complex challenges into practical, buildable solutions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="specialties" class="py-20 bg-[#F4F5F6]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-[#23272A] mb-4">Our Core Expertise</h2>
+                <div class="w-24 h-1 bg-[#F6E05E] mx-auto mb-6"></div>
+                <p class="text-[#4A4E51]">From concept blueprints to building permit handovers, we bring calculated precision to every phase of engineering design.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md border-t-4 border-transparent hover:border-[#F6E05E] transition-all group duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-[#23272A] text-[#F6E05E] flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-compass-drafting"></i></div>
+                    <h4 class="font-bold text-lg text-[#23272A] mb-2">Architectural Design</h4>
+                    <p class="text-sm text-[#4A4E51]">Customized and functional design solutions that balance aesthetics, efficiency, and project requirements.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md border-t-4 border-transparent hover:border-[#F6E05E] transition-all group duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-[#23272A] text-[#F6E05E] flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-calculator"></i></div>
+                    <h4 class="font-bold text-lg text-[#23272A] mb-2">Structural Analysis & Design</h4>
+                    <p class="text-sm text-[#4A4E51]">Structural calculations and engineering designs that ensure safety, durability, and compliance with applicable codes and standards.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md border-t-4 border-transparent hover:border-[#F6E05E] transition-all group duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-[#23272A] text-[#F6E05E] flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-layer-group"></i></div>
+                    <h4 class="font-bold text-lg text-[#23272A] mb-2">2D Drawings, Detailing & 3D Visualization</h4>
+                    <p class="text-sm text-[#4A4E51]">Detailed construction drawings and realistic 3D models that improve design understanding and support accurate project execution.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md border-t-4 border-transparent hover:border-[#F6E05E] transition-all group duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-[#23272A] text-[#F6E05E] flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-cube"></i></div>
+                    <h4 class="font-bold text-lg text-[#23272A] mb-2">Building Information Modeling (BIM)</h4>
+                    <p class="text-sm text-[#4A4E51]">Intelligent 3D coordination and data-driven modeling to improve accuracy, collaboration, and efficiency throughout design and construction.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md border-t-4 border-transparent hover:border-[#F6E05E] transition-all group duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-[#23272A] text-[#F6E05E] flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <h4 class="font-bold text-lg text-[#23272A] mb-2">BOQ & Cost Estimation</h4>
+                    <p class="text-sm text-[#4A4E51]">Accurate quantity takeoffs and cost estimates for effective budgeting and project planning.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md border-t-4 border-transparent hover:border-[#F6E05E] transition-all group duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-[#23272A] text-[#F6E05E] flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-file-shield"></i></div>
+                    <h4 class="font-bold text-lg text-[#23272A] mb-2">Design Coordination & Project Integration</h4>
+                    <p class="text-sm text-[#4A4E51]">Coordination of architectural, structural, and engineering elements to ensure design consistency, constructability, and smooth project execution across all stages of development.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md border-t-4 border-transparent hover:border-[#F6E05E] transition-all group duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-[#23272A] text-[#F6E05E] flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-folder-open"></i></div>
+                    <h4 class="font-bold text-lg text-[#23272A] mb-2">Permit & Submission Documentation</h4>
+                    <p class="text-sm text-[#4A4E51]">Preparation and coordination of complete drawings and documents required for building permit applications and regulatory approvals.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md border-t-4 border-transparent hover:border-[#F6E05E] transition-all group duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-[#23272A] text-[#F6E05E] flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-comments-dollar"></i></div>
+                    <h4 class="font-bold text-lg text-[#23272A] mb-2">Professional Consultation</h4>
+                    <p class="text-sm text-[#4A4E51]">Professional guidance on design development, project feasibility, construction methods, and technical solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section id="projects" class="py-20 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <h2 class="text-4xl font-bold text-center mb-12">
+      Featured Projects
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+        <img src="project1.jpg" class="w-full h-64 object-cover">
+
+        <div class="p-6">
+          <span class="text-yellow-500 text-sm font-bold">
+            RESIDENTIAL
+          </span>
+
+          <h3 class="text-2xl font-bold mt-2">
+            Valen Design
+          </h3>
+
+          <p class="mt-3 text-gray-600">
+            Modern residential design emphasizing
+            structural efficiency, aesthetics,
+            and long-term durability.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+        <img src="project2.jpg" class="w-full h-64 object-cover">
+
+        <div class="p-6">
+          <span class="text-yellow-500 text-sm font-bold">
+            RESIDENTIAL
+          </span>
+
+          <h3 class="text-2xl font-bold mt-2">
+            Bellen Design
+          </h3>
+
+          <p class="mt-3 text-gray-600">
+            Architectural and structural solutions
+            tailored for functionality, comfort,
+            and visual appeal.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+        <img src="project3.jpg" class="w-full h-64 object-cover">
+
+        <div class="p-6">
+          <span class="text-yellow-500 text-sm font-bold">
+            RESIDENTIAL
+          </span>
+
+          <h3 class="text-2xl font-bold mt-2">
+            Birung Design
+          </h3>
+
+          <p class="mt-3 text-gray-600">
+            Engineered with precision and optimized
+            for safety, practicality, and modern living.
+          </p>
+        </div>
+      </div>
+
     </div>
-</div>
 
-<!-- ================= SCRIPT ================= -->
-<script>
-    // MENU
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
+  </div>
+</section>
 
-    if (btn) {
+    <section id="contact" class="py-20 bg-[#F4F5F6]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden grid lg:grid-cols-5">
+                
+                <div class="lg:col-span-2 bg-[#23272A] text-white p-8 md:p-12 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4">Let's Discuss Your Project</h3>
+                        <p class="text-gray-400 text-sm mb-8">Reach out today for premium engineering solutions drafted to your exact benchmarks.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="text-[#F6E05E] text-xl mt-1"><i class="fa-solid fa-envelope"></i></div>
+                                <div>
+                                    <h6 class="font-semibold text-sm text-gray-300">Email Us</h6>
+                                    <a href="mailto:consizeengineering@gmail.com" class="text-white text-sm hover:text-[#F6E05E] transition-colors">consizeengineering@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="text-[#F6E05E] text-xl mt-1"><i class="fa-solid fa-phone"></i></div>
+                                <div>
+                                    <h6 class="font-semibold text-sm text-gray-300">Call Us</h6>
+                                    <a href="tel:+639339873049" class="text-white text-sm hover:text-[#F6E05E] transition-colors">+63 933 987 3049</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="text-[#F6E05E] text-xl mt-1"><i class="fa-solid fa-location-dot"></i></div>
+                                <div>
+                                    <h6 class="font-semibold text-sm text-gray-300">Location</h6>
+                                    <p class="text-white text-sm">Naga City, Philippines</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 pt-6 border-t border-gray-700 text-xs text-gray-400">
+                        "Precision in every scale"
+                    </div>
+                </div>
+
+                <form class="lg:col-span-3 p-8 md:p-12 space-y-6" onsubmit="event.preventDefault(); alert('Thank you! Your inquiry has been sent to consizeengineering@gmail.com.');">
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-[#4A4E51] mb-2">Your Name</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-[#4A4E51] mb-2">Email Address</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-[#4A4E51] mb-2">Required Specialty</label>
+                        <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm bg-white">
+                            <option>Architectural Design</option>
+                            <option>Structural Analysis & Design</option>
+                            <option>2D Drawings, Detailing & 3D Visualization</option>
+                            <option>Building Information Modeling (BIM)</option>
+                            <option>Bill of Quantities (BOQ) & Cost Estimation</option>
+                            <option>Design Coordination & Project Integration</option>
+                            <option>Permit & Submission Documentation</option>
+                            <option>Professional Consultation</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-[#4A4E51] mb-2">Project Brief</label>
+                        <textarea rows="4" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm" placeholder="Tell us about dimensions, timeline, or specifications..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full sm:w-auto px-8 py-4 bg-[#23272A] text-white hover:bg-[#4A4E51] font-bold rounded-lg transition-colors shadow-md text-center cursor-pointer">
+                        Submit Request
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#23272A] text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div>
+                <span class="font-bold text-lg tracking-wide block">ConSize Engineering</span>
+                <span class="text-xs text-gray-400 tracking-wider italic">"Precision in every scale"</span>
+            </div>
+            
+            <div class="flex space-x-6 text-sm text-gray-400">
+                <a href="#home" class="hover:text-white transition-colors">Home</a>
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#specialties" class="hover:text-white transition-colors">Specialties</a>
+                <a href="#projects" class="hover:text-[#F6E05E] transition-colors duration-300">Portfolio</a>
+            </div>
+
+            <div class="text-xs text-gray-500">
+                &copy; 2026 ConSize Engineering. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Responsive Menu Trigger
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
         btn.addEventListener('click', () => {
             menu.classList.toggle('hidden');
         });
-    }
 
-    // MODAL
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImg");
-    const closeBtn = document.getElementById("closeModal");
+        // 3D/Interactive Particle System Layer for Hero Background Canvas
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let particles = [];
+        const particleCount = 45;
 
-    function openModal(src) {
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-        modalImg.src = src;
-    }
-
-    function closeModal() {
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-        modalImg.src = "";
-    }
-
-    closeBtn.addEventListener("click", closeModal);
-
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeModal();
-    });
-
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeModal();
-    });
-
-    // PARTICLES (UNCHANGED SAFE VERSION)
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-
-    let particles = [];
-    const particleCount = 45;
-
-    function resizeCanvas() {
-        canvas.width = canvas.parentElement.offsetWidth;
-        canvas.height = canvas.parentElement.offsetHeight;
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.vx = (Math.random() - 0.5) * 0.4;
-            this.vy = (Math.random() - 0.5) * 0.4;
-            this.radius = Math.random() * 2 + 1;
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
         }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-        }
-
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(246,224,94,0.3)';
-            ctx.fill();
-        }
-    }
-
-    for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-    }
-
-    function animate() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-
-            for (let j = i + 1; j < particles.length; j++) {
-                const dist = Math.hypot(
-                    particles[i].x - particles[j].x,
-                    particles[i].y - particles[j].y
-                );
-
-                if (dist < 120) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(255,255,255,${0.08 * (1 - dist/120)})`;
-                    ctx.lineWidth = 0.8;
-                    ctx.stroke();
-                }
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.radius = Math.random() * 2 + 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(246, 224, 94, 0.3)';
+                ctx.fill();
             }
         }
 
-        requestAnimationFrame(animate);
-    }
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
 
-    animate();
-</script>
-
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw schematic node lines connecting particles
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.08 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 </html>
