@@ -188,7 +188,10 @@
     <div class="grid md:grid-cols-3 gap-8">
 
       <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-        <img src="project1.jpg" class="w-full h-64 object-cover">
+        <div class="aspect-video overflow-hidden cursor-pointer"
+     onclick="openModal('project1.jpg')">
+  <img src="project1.jpg" class="w-full h-full object-cover">
+</div>
 
         <div class="p-6">
           <span class="text-yellow-500 text-sm font-bold">
@@ -208,7 +211,10 @@
       </div>
 
       <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-        <img src="project2.jpg" class="w-full h-64 object-cover">
+        <div class="aspect-video overflow-hidden cursor-pointer"
+     onclick="openModal('project2.jpg')">
+  <img src="project2.jpg" class="w-full h-full object-cover">
+</div>
 
         <div class="p-6">
           <span class="text-yellow-500 text-sm font-bold">
@@ -228,7 +234,10 @@
       </div>
 
       <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-        <img src="project3.jpg" class="w-full h-64 object-cover">
+        <div class="aspect-video overflow-hidden cursor-pointer"
+     onclick="openModal('project3.jpg')">
+  <img src="project3.jpg" class="w-full h-full object-cover">
+</div>
 
         <div class="p-6">
           <span class="text-yellow-500 text-sm font-bold">
@@ -420,6 +429,38 @@
             requestAnimationFrame(animate);
         }
         animate();
+        function openModal(src) {
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImg");
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  modalImg.src = src;
+}
+
+document.getElementById("closeModal").addEventListener("click", () => {
+  const modal = document.getElementById("imageModal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+});
     </script>
+    <div id="imageModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+  
+  <div class="relative max-w-5xl w-full px-4">
+
+    <button id="closeModal"
+      class="absolute top-2 right-2 text-white text-2xl">
+      &times;
+    </button>
+
+    <div class="relative">
+      <img id="modalImg" class="w-full rounded-lg">
+
+      <!-- THIS IS THE NEW WATERMARK LAYER -->
+      <div class="absolute inset-0 pointer-events-none watermark-layer"></div>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>
