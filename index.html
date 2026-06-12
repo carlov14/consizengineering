@@ -296,21 +296,21 @@
                     </div>
                 </div>
 
-                <form class="lg:col-span-3 p-8 md:p-12 space-y-6" onsubmit="event.preventDefault(); alert('Thank you! Your inquiry has been sent to consizeengineering@gmail.com.');">
+                <form id="contact-form" class="lg:col-span-3 p-8 md:p-12 space-y-6">
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-[#4A4E51] mb-2">Your Name</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm">
+                            <input type="text" name="from_name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-[#4A4E51] mb-2">Email Address</label>
-                            <input type="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm">
+                            <input type="email" name="reply_to" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm">
                         </div>
                     </div>
                     
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-[#4A4E51] mb-2">Required Specialty</label>
-                        <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm bg-white">
+                        <select name="service" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm bg-white">
                             <option>Architectural Design</option>
                             <option>Structural Analysis & Design</option>
                             <option>2D Drawings, Detailing & 3D Visualization</option>
@@ -324,7 +324,7 @@
 
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-[#4A4E51] mb-2">Project Brief</label>
-                        <textarea rows="4" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm" placeholder="Tell us about dimensions, timeline, or specifications..."></textarea>
+                        <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F6E05E] focus:border-transparent text-sm" placeholder="Tell us about dimensions, timeline, or specifications..."></textarea>
                     </div>
 
                     <button type="submit" class="w-full sm:w-auto px-8 py-4 bg-[#23272A] text-white hover:bg-[#4A4E51] font-bold rounded-lg transition-colors shadow-md text-center cursor-pointer">
@@ -426,6 +426,33 @@
             requestAnimationFrame(animate);
         }
         animate();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        emailjs.init({
+            publicKey: "YOUR_PUBLIC_KEY"
+        });
+
+        const contactForm = document.getElementById("contact-form");
+
+        contactForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            try {
+                await emailjs.sendForm(
+                    "YOUR_SERVICE_ID",
+                    "YOUR_TEMPLATE_ID",
+                    contactForm
+                );
+
+                alert("Thank you! Your inquiry has been sent successfully.");
+                contactForm.reset();
+            } catch (error) {
+                console.error(error);
+                alert("Sorry, the message could not be sent. Please try again.");
+            }
+        });
     </script>
 </body>
 </html>
